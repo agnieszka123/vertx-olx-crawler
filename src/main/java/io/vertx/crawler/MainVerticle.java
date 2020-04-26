@@ -8,9 +8,8 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 
 public class MainVerticle extends AbstractVerticle {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MainVerticle.class);
     public static final String CONFIG_HTTP_SERVER_PORT = "http.server.port";
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainVerticle.class);
 
     @Override
     public void init(Vertx vertx, Context context) {
@@ -19,7 +18,7 @@ public class MainVerticle extends AbstractVerticle {
     }
 
     @Override
-    public void start(Future<Void> future) {
+    public void start(Promise<Void> promise) {
         vertx.deployVerticle(new OlxCrawlerVerticle());
 
         HttpServer server = vertx.createHttpServer();
@@ -32,10 +31,10 @@ public class MainVerticle extends AbstractVerticle {
                 .listen(portNumber, ar -> {
                     if (ar.succeeded()) {
                         LOGGER.info("HTTP server running on port " + portNumber);
-                        future.complete();
+                        promise.complete();
                     } else {
                         LOGGER.error("Could not start a HTTP server", ar.cause());
-                        future.fail(ar.cause());
+                        promise.fail(ar.cause());
                     }
                 });
 

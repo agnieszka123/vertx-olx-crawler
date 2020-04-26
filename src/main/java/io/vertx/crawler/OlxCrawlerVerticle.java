@@ -1,19 +1,19 @@
 package io.vertx.crawler;
 
+import io.vertx.api.ResponseStructureDO;
 import io.vertx.core.AbstractVerticle;
-import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.json.Json;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.client.WebClientOptions;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import io.vertx.api.ResponseStructureDO;
 
 public class OlxCrawlerVerticle extends AbstractVerticle {
 
     @Override
-    public void start(Future<Void> startFuture) {
+    public void start(Promise<Void> promise) {
         vertx.eventBus().consumer("olxCrawler", message -> {
             ResponseStructureDO response = new ResponseStructureDO();
             String keyword = message.body().toString();
