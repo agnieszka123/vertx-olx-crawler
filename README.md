@@ -12,7 +12,9 @@ Remarks:
 
 • Keyword needn’t to be a word ;) It can be few strings long (then they should be separated with
 the space).
+
 • Keyword can contain polish letters – results of the search will be different for “kon” and “koń”
+
 • When we try to search with unpopular word on OLX, the website will “fix” the parameter and
 redirect us to the proper (of course according to OLX) results. In the crawler I enforced
 searching for exactly given keyword, as in this case, it seems more logical and I expect that the
