@@ -8,7 +8,7 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 
 public class MainVerticle extends AbstractVerticle {
-    public static final String CONFIG_HTTP_SERVER_PORT = "http.server.port";
+    private static final String CONFIG_HTTP_SERVER_PORT = "http.server.port";
     private static final Logger LOGGER = LoggerFactory.getLogger(MainVerticle.class);
 
     @Override

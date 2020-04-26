@@ -28,7 +28,7 @@ public class OlxCrawlerVerticle extends AbstractVerticle {
                     .setTrustAll(true)
                     .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36");
 
-            String searchParam = "/oferty/q-" + keyword + "/?spellchecker=off";
+            String searchParam = "/oferty/q-".concat(keyword).concat("/?spellchecker=off");
             WebClient client = WebClient.create(vertx, options);
             client.get(443, "www.olx.pl", searchParam)
                     .putHeader("Connection", "keep-alive")
@@ -44,7 +44,8 @@ public class OlxCrawlerVerticle extends AbstractVerticle {
                                 if (info.isEmpty()) return;
                                 String name = element.getElementsByTag("strong").get(0).text();
                                 String id = element.getElementsByAttribute("data-id").attr("data-id");
-                                String price = info.size() == 2 ? element.getElementsByTag("strong").get(1).text() : "empty";
+                                String price = info.size() == 2 ?
+                                        element.getElementsByTag("strong").get(1).text() : "empty";
                                 price = price.equals("Za darmo") ? "For free" : price;
                                 response.addElement(id, name, price);
                             });
